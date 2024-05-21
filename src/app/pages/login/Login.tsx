@@ -1,80 +1,32 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import InputLogin from "./components/InputLogin";
+import logo from "assets/images/logo.png";
 
 function Login() {
-    const inputPasswordRef = useRef<HTMLInputElement>(null);
-    const navigate = useNavigate();
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-
-    const emailLength = useMemo(() => {
-        console.log("Executou!");
-        return email.length * 1000;
-    }, [email.length]);
-
-    useEffect(() => {
-        // if (window.confirm("Você é um usuário?")) {
-        //     console.log("Sim!");
-        // } else {
-        //     console.log("Não!");
-        // }
-    }, []);
-
-    useEffect(() => {
-        console.log(email);
-    }, [email]);
-
-    useEffect(() => {
-        console.log(password);
-    }, [password]);
-
-    const handleClick = () => {
-        navigate("/pagina-inicial");
-    };
-
-    const handleEntrar = useCallback(() => {
-        console.log(email);
-        console.log(password);
-    }, [email, password]);
-
     return (
-        <div>
-            <form>
-                <p>Quantidade de caracteres no email: {emailLength}</p>
-                <label>
-                    <span>E-mail</span>
-                    <input
-                        type="text"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        onKeyDown={(e) =>
-                            e.key === "Enter"
-                                ? inputPasswordRef.current?.focus()
-                                : undefined
-                        }
+        <div className="flex justify-center items-center bg-white1 min-h-screen">
+            <div className="w-96 h-96 shadow-3xl rounded-2xl p-16 bg-white">
+                <form className="space-y-6" action="#">
+                    <img
+                        className="object-fill"
+                        src={logo}
+                        alt="Logo da b2bit"
                     />
-                </label>
+                    <div>
+                        <InputLogin />
+                    </div>
+                    <div>
+                        <InputLogin />
+                    </div>
+                    <button
+                        type="submit"
+                        className="rounded-md w-full bg-blueb2 text-White text-xl font-bold p-2"
+                    >
+                        Sign In
+                    </button>
+                </form>
+            </div>
 
-                <label>
-                    <span>Password</span>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        ref={inputPasswordRef}
-                    />
-                </label>
-
-                <button type="button" onClick={handleEntrar}>
-                    Sign In
-                </button>
-            </form>
-            <button
-                className="bg-blue-950 rounded-md p-2 text-center text-white w-64 mt-4"
-                onClick={handleClick}
-            >
-                Página Inicial
-            </button>
+            <form></form>
         </div>
     );
 }
